@@ -6,8 +6,8 @@
   Status: Draft
   Type: Standards Track
   Created: 2017-08-24
-  License: BSD-2-Clause
-           OPL
+  License: CC-BY-SA-4.0
+  License-Code: MIT
 </pre>
 
 ==Abstract==
