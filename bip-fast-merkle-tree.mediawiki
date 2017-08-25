@@ -19,6 +19,26 @@ This particular design, created by Satoshi, suffers from a serious flaw related 
 
 This Bitcoin Improvement Proposal describes a more efficient Merkle hash tree construct that is not vulnerable to CVE-2012-2459 and achieves an approximate 3x decrease in hash tree construction and validation times.
 
+==Motivation==
+
+A Merkle hash-tree is a directed acyclic graph data structure where all non-terminal nodes are labeled with the hash of combined labels or values of the node(s) it is connected to.
+Bitcoin uses a unique Merkle hash tree construct invented by Satoshi for calculating the block header commitment to the list of transactions in a block.
+While it would be convenient for new applications to make use of this same data structure so as to share implementation and maintenance costs, there are three principle drawbacks to reuse.
+
+First, Satoshi's Merkle hash-tree has a serious vulnerability[1] related to duplicate tree entries that can cause bugs in protocols that use it.
+While it is possible to secure protocols and implementations against exploit of this flaw, it requires foresight and a is a bit more tricky to design secure protocols that work around this vulnerability.
+Designers of new protocols ought avoid using the Satoshi Merkle hash-tree construct where at all possible in order to responsibly decrease the likelihood of downstream bugs in naïve implementations.
+
+Second, Satoshi's Merkle hash-tree performs an unnecessary number of cryptographic hash function compression rounds, resulting in approximately three (3) times more computation for construction and validation than is strictly necessary.
+New implementations that do not require backwards compatibility ought to consider hash-tree implementations that do not carry this unnecessary performance hit.
+
+Third, Satoshi's algorithm presumes construction of a tree index from an ordered list, and therefore is designed to support balanced trees with a uniform path length from root to leaf for all elements in the tree.
+Many applications, on the other hand, benefit from having unbalanced trees, particularly if the shorter path is more likely to be used.
+While it is possible to make a few elements of a Satoshi hash-tree have shorter paths than the others, the tricks for doing so are dependent on the size of the tree and not very flexible.
+
+Together these three reasons provide justification for specifying a standard Merkle hash-tree structure for use in new protocols that fixes these issues.
+This BIP describes such a structure, and provides an example implementation.
+
 ==References==
 
 [1] [https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2459 National Vulnerability Database: CVE-2012-2459]
