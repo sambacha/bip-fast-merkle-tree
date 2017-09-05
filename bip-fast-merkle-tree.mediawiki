@@ -105,7 +105,7 @@ To prevent proof malleability, a path cannot have a bit set for which there is n
 Note that this serialization format is not self-segmenting.
 The deserializer must know how long the proof object is to determine how many hashes to read.
 
-==Addendum: Fast Merkle Lists==
+==Fast Merkle Lists==
 
 Many applications use a Merkle tree to provide indexing of, or compact membership proofs of an element in a list.
 This ammendum specifies and algorithm that constructs a canonical balanced tree structure for lists of various lengths.
