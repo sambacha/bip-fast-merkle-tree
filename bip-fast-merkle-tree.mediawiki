@@ -44,7 +44,7 @@ This BIP describes such a structure, and provides an example implementation.
 A Merkle hash tree as defined by this BIP is an arbitrarily-balanced binary tree whose terminal/leaf nodes are labelled with the double-SHA256 hashes of data, whose format is outside the scope of this BIP, and interior nodes with labels constructed from the fast-SHA256 hash of its children's labels.
 The following image depicts an unbalanced hash tree that will be used as an example in this specification:
 
-<img src="unbalanced-hash-tree.png">
+[[File:https://gist.githubusercontent.com/maaku/41b0054de0731321d23e9da90ba4ee0a/raw/7d9739431c8ee5a207f37ffde34d668bfce0a8c1/unbalanced-hash-tree.png]]
 
 '''A''', '''B''', and '''C''' are leaf labels, 32-byte double-SHA256 hashes of the data associated with the leaf.
 '''Node''' and '''Root''' are interior nodes, whose labels are fast-SHA256 (defined below) hashes of their respective children's labels.
