@@ -92,8 +92,8 @@ The following algorithm validates a proof:
 # Begin with a root hash '''r''', a leaf hash '''v''', an integer path '''p''', and a list of branch hashes '''b'''.
 # Set '''h''' to the leaf value '''v'''.
 # For i in [0, path length):
-#* If p&(1<<i) [bit i is set in p]: h = fast-SHA256(b[i] || h)
-#* Else [bit i is not set in p]: h = fast-SHA256(h || b[i])
+#* If <nowiki>p&(1<<i) [bit i is set in p]: h = fast-SHA256(b[i] || h)</nowiki>
+#* Else <nowiki>[bit i is not set in p]: h = fast-SHA256(h || b[i])</nowiki>
 # Check if '''h''' matches the root hash '''r'''.
 
 Note what this algorithm implies: lower-order path bits are closer to the element being proved, whereas higher-order path bits are closer to the root, and branch hashes are stored from bottom (sibling to the element) to top (child of the root).
