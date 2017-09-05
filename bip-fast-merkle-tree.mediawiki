@@ -83,6 +83,10 @@ It differs in a subtle but important way from the algorithm used by Satoshi so a
 #* Pass through the list combining adjacent entries with the fast-SHA256 hash. If the list has an odd number of elements, leave the last element as-is (this fixes [1]). This step reduces a list of N elements to ceil(N/2) entries.
 # The last remaining item in the list is the Merkle root.
 
+This algorithm differs from Merkle lists used in bitcoin in two ways.
+First, fast-SHA256 is used instead of double-SHA256 for interior node labels.
+Second, final entries on an odd-length list are not duplicated and hashed, which is the mistake that led to CVE-2012-2459[1].
+
 ==References==
 
 [1] [https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2459 National Vulnerability Database: CVE-2012-2459]
