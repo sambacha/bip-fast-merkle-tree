@@ -70,6 +70,41 @@ Validating a fast-SHA256 Merkle root is therefore 3x as fast as the double-SHA25
 The application of fast-SHA256 to interior-node label updates is safe in this limited domain because the inputs are hash values and fixed in number and in length,
 so the sorts of attacks prevented by message padding and double-hashing do not apply.
 
+==Inclusion Proofs==
+
+An important use of Merkle hash trees is the ability to compactly prove membership with log-sized proofs.
+This section specifies a standard encoding for a single-element inclusion proof.
+
+To prove that a hash is contained within a Merkle tree with a given root requires four pieces of information:
+
+# The root hash of the Merkle tree;
+# The hash of the node under consideration, usually the double-SHA256 of a data element, but potentially the label of an interior node instead;
+# The path from the root to the node under consideration, expressed as a series of left/right binary choices; and
+# The hash values of branches not taken along the path.
+
+Typically the last two elements, the path and the elided branch hashes, are lumped together and referred to as the ''proof''.
+
+The path is represented as an unsigned integer with a number of bits equal to the length of the path.
+A zero (0) indicates the left-branch is taken and the elided right-branch hash is provided, while a one (1) indicates a right-branch is taken and the elided left-branch hash is provided.
+The list of hashes for branches not taken is equal in size to the length of the path.
+The following algorithm validates a proof:
+
+# Begin with a root hash '''r''', a leaf hash '''v''', an integer path '''p''', and a list of branch hashes '''b'''.
+# Set '''h''' to the leaf value '''v'''.
+# For i in [0, path length):
+#* If p&(1<<i) [bit i is set in p]: h = fast-SHA256(b[i] || h)
+#* Else [bit i is not set in p]: h = fast-SHA256(h || b[i])
+# Check if '''h''' matches the root hash '''r'''.
+
+Note what this algorithm implies: lower-order path bits are closer to the element being proved, whereas higher-order path bits are closer to the root, and branch hashes are stored from bottom (sibling to the element) to top (child of the root).
+
+A proof is serialized by first serializing the path as a variable-length unsigned integer, using the VARINT serialization format, then the hashes are serialized from bottom to top.
+This serialization format implicitly encodes the length of the proof as the number of 32-byte hashes which can be extracted from the stream after the path has been deserialized.
+To prevent proof malleability, a path cannot have a bit set for which there is no corresponding branch hash, and such proofs should fail validation.
+
+Note that this serialization format is not self-segmenting.
+The deserializer must know how long the proof object is to determine how many hashes to read.
+
 ==Addendum: Fast Merkle Lists==
 
 Many applications use a Merkle tree to provide indexing of, or compact membership proofs of an element in a list.
