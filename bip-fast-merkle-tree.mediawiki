@@ -70,6 +70,19 @@ Validating a fast-SHA256 Merkle root is therefore 3x as fast as the double-SHA25
 The application of fast-SHA256 to interior-node label updates is safe in this limited domain because the inputs are hash values and fixed in number and in length,
 so the sorts of attacks prevented by message padding and double-hashing do not apply.
 
+==Addendum: Fast Merkle Lists==
+
+Many applications use a Merkle tree to provide indexing of, or compact membership proofs of an element in a list.
+This ammendum specifies and algorithm that constructs a canonical balanced tree structure for lists of various lengths.
+It differs in a subtle but important way from the algorithm used by Satoshi so as to structurally prevent the vulnerability described in [1].
+
+# Begin with a list of arbitrary data strings.
+# Pre-process the list by replacing each element with its double-SHA256 hash.
+# If the list is empty, return the zero hash.
+# While the list has 2 or more elements,
+#* Pass through the list combining adjacent entries with the fast-SHA256 hash. If the list has an odd number of elements, leave the last element as-is (this fixes [1]). This step reduces a list of N elements to ceil(N/2) entries.
+# The last remaining item in the list is the Merkle root.
+
 ==References==
 
 [1] [https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2459 National Vulnerability Database: CVE-2012-2459]
