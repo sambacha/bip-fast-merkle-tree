@@ -39,6 +39,30 @@ While it is possible to make a few elements of a Satoshi hash-tree have shorter 
 Together these three reasons provide justification for specifying a standard Merkle hash-tree structure for use in new protocols that fixes these issues.
 This BIP describes such a structure, and provides an example implementation.
 
+==Specification==
+
+A Merkle hash tree as defined by this BIP is an arbitrarily-balanced binary tree whose terminal/leaf nodes are labelled with the double-SHA256 hashes of data, whose format is outside the scope of this BIP, and interior nodes with labels constructed from the fast-SHA256 hash of its children's labels.
+The following image depicts an unbalanced hash tree that will be used as an example in this specification:
+
+<img src="unbalanced-hash-tree.png">
+
+'''A''', '''B''', and '''C''' are leaf labels, 32-byte double-SHA256 hashes of the data associated with the leaf.
+'''Node''' and '''Root''' are interior nodes, whose labels are fast-SHA256 (defined below) hashes of their respective children's labels.
+'''Node''' is labelled with the fast-SHA256 hash of the concatination of '''B''' and '''C'''.
+'''Root''' is labelled with the fast-SHA256 hash of the concatination of '''A''' and '''Node''', and is the ''Merkle root'' of the tree.
+Nodes with single children are not allowed.
+
+The ''double-SHA256'' cryptographic hash function takes an arbitrary-length data as input and produces a 32-byte hash by running the data through the SHA-256 hash function as specified in FIPS 180-4[2], and then running the same hash function again on the result, as a protection against length-extension attacks.
+
+The ''fast-SHA256'' cryptographic hash function takes two 32-byte hash values, concatenates these to produce a 64-byte buffer, and single run of the SHA-256 hash function without message paddding.
+The result is a 32-byte 'midstate' which is the combined hash value and label of the interior node.
+fast-SHA256 is only defined for two 32-byte inputs.
+
+There are two special cases:
+an empty Merkle tree hash a root hash value of zero,
+and a Merkle tree with a single value has a root hash value equal to that double-SHA256 label.
+
 ==References==
 
 [1] [https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2459 National Vulnerability Database: CVE-2012-2459]
+[2] [http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf Secure Hash Standard]
