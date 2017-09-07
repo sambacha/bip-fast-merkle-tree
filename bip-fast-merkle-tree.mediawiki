@@ -60,7 +60,7 @@ fast-SHA256 is only defined for two 32-byte inputs.
 
 There are two special cases:
 an empty Merkle tree hash a root hash value of zero,
-and a Merkle tree with a single value has a root hash value equal to that double-SHA256 label.
+and a Merkle tree with a single value has a root hash value equal to the label of that single node (a passthrough operation with no hashing).
 
 ==Rationale==
 
