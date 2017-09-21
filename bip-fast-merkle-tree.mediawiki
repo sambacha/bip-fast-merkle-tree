@@ -54,7 +54,7 @@ Nodes with single children are not allowed.
 
 The ''double-SHA256'' cryptographic hash function takes an arbitrary-length data as input and produces a 32-byte hash by running the data through the SHA-256 hash function as specified in FIPS 180-4[2], and then running the same hash function again on the result, as a protection against length-extension attacks.
 
-The ''fast-SHA256'' cryptographic hash function takes two 32-byte hash values, concatenates these to produce a 64-byte buffer, and single run of the SHA-256 hash function with a custom IV and without message paddding.
+The ''fast-SHA256'' cryptographic hash function takes two 32-byte hash values, concatenates these to produce a 64-byte buffer, and single run of the SHA-256 hash function with a custom 'initialization vector' (IV) and without message paddding.
 The result is a 32-byte 'midstate' which is the combined hash value and label of the interior node, with the changed IV protecting against path-length extension attacks (grinding to interpret a hash as both an inner node and a leaf).
 fast-SHA256 is only defined for two 32-byte inputs.
 The custom IV is the intermediate hash value generated after performing a standard SHA-256 of the following hex-encoded bytes and extracting the midstate:
@@ -83,7 +83,7 @@ Validating a fast-SHA256 Merkle root is therefore 3x as fast as the double-SHA25
 The application of fast-SHA256 to interior-node label updates is safe in this limited domain because the inputs are hash values and fixed in number and in length,
 so the sorts of attacks prevented by message padding and double-hashing do not apply.
 
-The IV for fast-SHA256 is changed in order to prevent a possible attack of grinding a hash value that can serve as a leaf hash and as an inner node commitment to another leaf hash.
+The 'initialization vector' for fast-SHA256 is changed in order to prevent a possible attack of grinding a hash value that can serve as a leaf hash and as an inner node commitment to another leaf hash.
 The IV is computed using standard SHA-256 plus midstate extraction so as to preserve compatability with cryptographic library interfaces that do not support custom IVs, at the cost of a 2x performance hit in that case.
 The data to be hashed data is a nothing-up-my-sleeve number that is unlikely to have a known hash preimage.
 
