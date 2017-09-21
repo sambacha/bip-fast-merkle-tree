@@ -83,6 +83,16 @@ Validating a fast-SHA256 Merkle root is therefore 3x as fast as the double-SHA25
 The application of fast-SHA256 to interior-node label updates is safe in this limited domain because the inputs are hash values and fixed in number and in length,
 so the sorts of attacks prevented by message padding and double-hashing do not apply.
 
+The IV for fast-SHA256 is changed in order to prevent a possible attack of grinding a hash value that can serve as a leaf hash and as an inner node commitment to another leaf hash.
+The IV is computed using standard SHA-256 plus midstate extraction so as to preserve compatability with cryptographic library interfaces that do not support custom IVs, at the cost of a 2x performance hit in that case.
+The data to be hashed data is a nothing-up-my-sleeve number that is unlikely to have a known hash preimage.
+
+The Merkle root hash of a single element tree is a simple pass-through of the leaf hash without modification so as to allow for chained validation of split proofs.
+This is particularly useful when the validation environment constrains proof sizes, such as push limits in Bitcoin script.
+Chained validation allows a verifier to split one proof into two or more, where the leaf is shown to be under an inner node, and that inner node is shown to be under the root.
+Without pass-through hashing in a single-element tree, use of chained validation would unnecessarily introduce a minimum path length requirement equal to the number of chain links.
+Pass-through hashing of single elements allows instead for one or more of the chained validations to use a "NOP" proof consisting of a zero-length path, thereby allowing, for example, a series of 4 chained validations to verify a length 3 path.
+
 ==Inclusion Proofs==
 
 An important use of Merkle hash trees is the ability to compactly prove membership with log-sized proofs.
