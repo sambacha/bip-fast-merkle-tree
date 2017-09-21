@@ -83,7 +83,7 @@ Validating a fast-SHA256 Merkle root is therefore 3x as fast as the double-SHA25
 The application of fast-SHA256 to interior-node label updates is safe in this limited domain because the inputs are hash values and fixed in number and in length,
 so the sorts of attacks prevented by message padding and double-hashing do not apply.
 
-The 'initialization vector' for fast-SHA256 is changed in order to prevent the possible attack of grinding a hash value that can serve as a leaf hash and as an inner node commitment to another leaf hash.
+The 'initialization vector' for fast-SHA256 is changed in order to prevent the possible attack of grinding a hash value that can serve both as a leaf hash and as an inner node commitment to another leaf hash.
 The IV is computed using standard SHA-256 plus midstate extraction so as to preserve compatability with cryptographic library interfaces that do not support custom IVs, at the cost of a 2x performance hit in that case.
 The data to be hashed data is a nothing-up-my-sleeve number that is unlikely to have a known hash preimage.
 
