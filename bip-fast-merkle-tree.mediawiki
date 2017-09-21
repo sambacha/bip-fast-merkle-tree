@@ -72,7 +72,7 @@ The resulting midstate is used as IV for the fast-SHA256 cryptographic hash func
           0xec, 0x1d, 0xcc, 0xf0, 0x8f, 0x77, 0x5b, 0xbd };
 
 As fast-SHA256 is only defined for two hash inputs, there are necessarily two special cases:
-an empty Merkle tree hash a root hash value of zero,
+an empty Merkle tree has a root hash value of zero,
 and a Merkle tree with a single value has a root hash value equal to the label of that single node (a passthrough operation with no hashing).
 
 ==Rationale==
@@ -121,7 +121,7 @@ The deserializer must know how long the proof object is to determine how many ha
 ==Fast Merkle Lists==
 
 Many applications use a Merkle tree to provide indexing of, or compact membership proofs of an element in a list.
-This ammendum specifies and algorithm that constructs a canonical balanced tree structure for lists of various lengths.
+This ammendum specifies an algorithm that constructs a canonical balanced tree structure for lists of various lengths.
 It differs in a subtle but important way from the algorithm used by Satoshi so as to structurally prevent the vulnerability described in [1].
 
 # Begin with a list of arbitrary data strings.
