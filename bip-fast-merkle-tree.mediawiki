@@ -1,7 +1,7 @@
 <pre>
   BIP: ???
   Layer: Consensus (soft fork)
-  Title: Fast Merkle Trees (Consensus layer)
+  Title: Fast Merkle Trees
   Author: Mark Friedenbach <mark@friedenbach.org>
   Status: Draft
   Type: Standards Track
