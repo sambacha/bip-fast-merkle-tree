@@ -121,7 +121,7 @@ followed by the hashes themselves in the order previously traversed.
 
 There are eight possible configurations of internal nodes, as given in the following diagram:
 
-:: [[File:node-variants.png]]
+:: [[File:https://gist.github.com/maaku/41b0054de0731321d23e9da90ba4ee0a/raw/b85c1c05aaec55598fa79770a17141fe86295002/node-variants.png]]
 
 In this diagram, DESCEND means the branch links to another internal node, as indicated by the its child graph elements labeled "...".
 SKIP means the branch contains a hash of an elided subtree or element, and the fast-SHA256 root hash of this subtree or double-SHA256 hash of the element is included in the proof structure.
@@ -185,7 +185,7 @@ and the number of SKIP hashes can be either 0 or 1.
 
 Consider the following Merkle tree structure:
 
-:: [File:traversal-example.png]
+:: [File:https://gist.github.com/maaku/41b0054de0731321d23e9da90ba4ee0a/raw/b85c1c05aaec55598fa79770a17141fe86295002/traversal-example.png]
 
 There are six (6) internal nodes.
 The depth-first, left-to-right, pre-order traversal of the tree visits these nodes in the following order: A, B, D, F, C, then E.
@@ -224,7 +224,11 @@ The resulting 101 byte proof, encoded in base64:.
 ===Rationale===
 
 The 3-bit encoding for inner nodes allows encoding all relevant configurations of the nodes where the left and right branches can each be one of {DESCEND, SKIP, VERIFY}.
-The excluded 9th possibility would have both branches as SKIP--this possibility is not allowed as for verification purposes it is entirely equivalent to the shorter proof where the branch to that node was SKIP'ed.
+The excluded 9th possibility would have both branches as SKIP:
+
+:: [File:https://gist.github.com/maaku/41b0054de0731321d23e9da90ba4ee0a/raw/b85c1c05aaec55598fa79770a17141fe86295002/skip-skip.png]
+
+This possibility is not allowed as for verification purposes it is entirely equivalent to the shorter proof where the branch to that node was SKIP'ed.
 Disallowing a node with two SKIP branches eliminates what would otherwise be a source of proof malleability.
 
 The number of hashing operations required to verify a proof is one less than the number of hashes (SKIP and VERIFY combined),
