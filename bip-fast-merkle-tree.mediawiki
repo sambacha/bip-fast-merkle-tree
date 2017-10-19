@@ -27,7 +27,7 @@ Bitcoin uses a unique Merkle hash-tree construct invented by Satoshi for calcula
 While it would be convenient for new applications to make use of this same data structure so as to share implementation and maintenance costs, there are three principle drawbacks to reuse.
 
 First, Satoshi's Merkle hash-tree has a serious vulnerability[1] related to duplicate tree entries that can cause bugs in protocols that use it.
-While it is possible to secure protocols and implementations against exploit of this flaw, it requires foresight and a is a bit more tricky to design secure protocols that work around this vulnerability.
+While it is possible to secure protocols and implementations against exploit of this flaw, it requires foresight and it is a bit more tricky to design secure protocols that work around this vulnerability.
 Designers of new protocols ought avoid using the Satoshi Merkle hash-tree construct where at all possible in order to responsibly decrease the likelihood of downstream bugs in naïve implementations.
 
 Second, Satoshi's Merkle hash-tree performs an unnecessary number of cryptographic hash function compression rounds, resulting in construction and validation times that are approximately three (3) times more computation than is strictly necessary in a naïve implementation, or 2.32x more computation in an implementation specialized for this purpose only[2].
