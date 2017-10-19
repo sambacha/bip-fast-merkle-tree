@@ -13,17 +13,17 @@
 ==Abstract==
 
 In many applications it is useful to prove membership of a data element in a set without having to reveal the entire contents of that set.
-The Merkle hash tree, where inner/non-leaf nodes are labeled with the hash of the labels or values of its children, is a cryptographic tool that achieves this goal.
-Bitcoin uses a Merkle hash tree construct for committing the transactions of a block into the block header.
+The Merkle hash-tree, where inner/non-leaf nodes are labeled with the hash of the labels or values of its children, is a cryptographic tool that achieves this goal.
+Bitcoin uses a Merkle hash-tree construct for committing the transactions of a block into the block header.
 This particular design, created by Satoshi, suffers from a serious flaw related to duplicate entries documented in the National Vulnerability Database as CVE-2012-2459[1], and also suffers from less than optimal performance due to unnecessary double-hashing.
 
-This Bitcoin Improvement Proposal describes a more efficient Merkle hash tree construct that is not vulnerable to CVE-2012-2459
-and achieves an approximate 55% decrease in hash tree construction and validation times as compared with fully optimized implementations of the Satoshi Merkle hash tree construct.
+This Bitcoin Improvement Proposal describes a more efficient Merkle hash-tree construct that is not vulnerable to CVE-2012-2459
+and achieves an approximate 55% decrease in hash-tree construction and validation times as compared with fully optimized implementations of the Satoshi Merkle hash-tree construct.
 
 ==Motivation==
 
 A Merkle hash-tree is a directed acyclic graph data structure where all non-terminal nodes are labeled with the hash of combined labels or values of the node(s) it is connected to.
-Bitcoin uses a unique Merkle hash tree construct invented by Satoshi for calculating the block header commitment to the list of transactions in a block.
+Bitcoin uses a unique Merkle hash-tree construct invented by Satoshi for calculating the block header commitment to the list of transactions in a block.
 While it would be convenient for new applications to make use of this same data structure so as to share implementation and maintenance costs, there are three principle drawbacks to reuse.
 
 First, Satoshi's Merkle hash-tree has a serious vulnerability[1] related to duplicate tree entries that can cause bugs in protocols that use it.
@@ -42,8 +42,8 @@ This BIP describes such a structure, and provides an example implementation.
 
 ==Specification==
 
-A Merkle hash tree as defined by this BIP is an arbitrarily-balanced binary tree whose terminal/leaf nodes are labelled with the double-SHA256 hashes of data, whose format is outside the scope of this BIP, and interior nodes with labels constructed from the fast-SHA256 hash of its children's labels.
-The following image depicts an example unbalanced hash tree:
+A Merkle hash-tree as defined by this BIP is an arbitrarily-balanced binary tree whose terminal/leaf nodes are labelled with the double-SHA256 hashes of data, whose format is outside the scope of this BIP, and interior nodes with labels constructed from the fast-SHA256 hash of its children's labels.
+The following image depicts an example unbalanced hash-tree:
 
 :: [[File:https://gist.github.com/maaku/41b0054de0731321d23e9da90ba4ee0a/raw/6e6a42b4ec905207eab1b69401b6cc0fffa42b2f/unbalanced-hash-tree.png]]
 
@@ -102,7 +102,7 @@ thereby allowing, for example, a fixed series of four (4) chained validations to
 
 ==Inclusion Proofs==
 
-An important use of Merkle hash trees is the ability to compactly prove membership with log-sized proofs.
+An important use of Merkle hash-trees is the ability to compactly prove membership with log-sized proofs.
 This section specifies a standard encoding for a multi-element inclusion proof.
 
 To prove that a set of hashes is contained within a Merkle tree with a given root requires four pieces of information:
