@@ -128,44 +128,44 @@ SKIP means the branch contains a hash of an elided subtree or element, and the f
 VERIFY means the branch contains an externally provided hash that is needed as witness for the verification of the proof.
 In tabular form, these code values are:
 
-  {| class="wikitable"
-  |-
-  | scope="col"| Code
-  | scope="col"| Left
-  | scope="col"| Right
-  |-
-  | scope="row"| 000
-  | VERIFY
-  | SKIP
-  |-
-  | scope="row"| 001
-  | VERIFY
-  | VERIFY
-  |-
-  | scope="row"| 010
-  | VERIFY
-  | DESCEND
-  |-
-  | scope="row"| 011
-  | DESCEND
-  | SKIP
-  |-
-  | scope="row"| 100
-  | DESCEND
-  | VERIFY
-  |-
-  | scope="row"| 101
-  | DESCEND
-  | DESCEND
-  |-
-  | scope="row"| 110
-  | SKIP
-  | VERIFY
-  |-
-  | scope="row"| 111
-  | SKIP
-  | DESCEND
-  |}
+{| class="wikitable"
+|-
+| scope="col"| Code
+| scope="col"| Left
+| scope="col"| Right
+|-
+| scope="row"| 000
+| VERIFY
+| SKIP
+|-
+| scope="row"| 001
+| VERIFY
+| VERIFY
+|-
+| scope="row"| 010
+| VERIFY
+| DESCEND
+|-
+| scope="row"| 011
+| DESCEND
+| SKIP
+|-
+| scope="row"| 100
+| DESCEND
+| VERIFY
+|-
+| scope="row"| 101
+| DESCEND
+| DESCEND
+|-
+| scope="row"| 110
+| SKIP
+| VERIFY
+|-
+| scope="row"| 111
+| SKIP
+| DESCEND
+|}
 
 These 3-bit codes are packed into a byte array such that eight (8) codes would fit in every three (3) bytes.
 The order of filling a byte begins with the most significant bit <code>0x80</code> and ends with the lest significant bit <code>0x01</code>.
