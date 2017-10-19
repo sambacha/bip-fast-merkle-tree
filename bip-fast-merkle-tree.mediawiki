@@ -115,7 +115,7 @@ To prove that a set of hashes is contained within a Merkle tree with a given roo
 Typically the last two elements, the paths and the elided branch hashes, are lumped together and referred to as the ''proof''.
 
 Serialization begins with a variable-length integer (VarInt)  used to encode N, the number of internal nodes in the proof.
-Next the structure of the tree is traversed using depth-first, left-to-right, pre-order algorithm to visit each internal nodes, which is serialized using a packed 3-bit representation for the configuration of each node, consuming <code>(3*N + 7) / 8</code> bytes.
+Next the structure of the tree is traversed using depth-first, left-to-right, pre-order algorithm to visit each internal nodes, which are serialized using a packed 3-bit representation for the configuration of each node, consuming <code>(3*N + 7) / 8</code> bytes.
 Then the number skipped hashes (those included in the proof, not verified by the proof) is serialized as a variable-length integer (VarInt),
 followed by the hashes themselves in the order previously traversed.
 
