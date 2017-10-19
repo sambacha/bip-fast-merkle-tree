@@ -79,7 +79,7 @@ and a Merkle tree with a single value has a root hash label equal to that self-s
 
 ===Rationale===
 
-The fast-SHA256 hash function can be calculated 2.32x faster than a specialized double-SHA256 implementation[2], or three (3) times faster than an implementation applying generic SHA-256 twice,
+The fast-SHA256 hash function can be calculated 2.32x faster than a specialized double-SHA256 implementation[2], or three (3) times faster than an implementation applying a generic SHA-256 primitive twice,
 as hashing 64 bytes of data with SHA-256 as specified by FIPS 180-4[3] takes two compression runs (because of message padding) and then a third compression run for the double-SHA256 construction.
 Validating a fast-SHA256 Merkle root is therefore more than twice as fast as the double-SHA256 construction used by Satoshi in bitcoin.
 Furthermore the fastest fast-SHA256 implementation ''is'' the generic SHA-256 implementation, enabling generic circuitry and code reuse without a cost to performance.
