@@ -123,8 +123,8 @@ There are eight possible configurations of internal nodes, as given in the follo
 
 :: [[File:https://gist.github.com/maaku/41b0054de0731321d23e9da90ba4ee0a/raw/b85c1c05aaec55598fa79770a17141fe86295002/node-variants.png]]
 
-In this diagram, DESCEND means the branch links to another internal node, as indicated by the its child graph elements labeled "..."
-SKIP means the branch contains a hash of an elided subtree or element, and the fast-SHA256 root hash of this subtree or double-SHA256 hash of the element is included in the proof structure.
+In this diagram, DESCEND means the branch links to another internal node, as indicated by the its child graph elements labeled "...";
+SKIP means the branch contains a hash of an elided subtree or element, and the fast-SHA256 root hash of this subtree or double-SHA256 hash of the element is included in the proof structure; and
 VERIFY means the branch contains an externally provided hash that is needed as witness for the verification of the proof.
 In tabular form, these code values are:
 
