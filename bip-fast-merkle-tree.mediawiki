@@ -174,7 +174,7 @@ These excess bits must be zero.
 
 Note that the tree serialization is self-segmenting.
 By tracking tree structure a proof reader will know when the parser has reached the last internal node.
-The number of innder nodes serialized in the proof MUST equal the number of nodes inferred from the tree structure itself.
+The number of inner nodes serialized in the proof MUST equal the number of nodes inferred from the tree structure itself.
 Similarly, the number of SKIP hashes can also be inferred from the tree structure as serialized, and MUST equal the number of hashes provided within the proof.
 
 The single-hash proof has N=0 (the number of inner nodes),
