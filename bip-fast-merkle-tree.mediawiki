@@ -89,7 +89,7 @@ so the sorts of attacks prevented by message padding and double-hashing do not a
 
 The 'initialization vector' for fast-SHA256 is changed in order to prevent a category of attacks on higher level protocols where a partial collision can serve as both a leaf hash and as an inner node commitment to another leaf hash.
 The IV is computed using standard SHA-256 plus midstate extraction so as to preserve compatability with cryptographic library interfaces that do not support custom IVs, at the cost of a 2x performance hit if neither custom IVs nor resuming from midstate are supported.
-The data to be hashed data is a nothing-up-my-sleeve number that is unlikely to have a known hash preimage.
+The data hashed is a nothing-up-my-sleeve number that is unlikely to have a known hash preimage.
 The prime 23 was chosen as the leading fractional bits of the first eight (8) primes, two (2) through nineteen (19), are constants used in the setup of SHA-256 itself.
 Using the next prime in sequence reduces the likelihood of introducing weakness due to reuse of a constant factor.
 
