@@ -1,5 +1,5 @@
 <pre>
-  BIP: ???
+  BIP: 98
   Layer: Consensus (soft fork)
   Title: Fast Merkle Trees
   Author: Mark Friedenbach <mark@friedenbach.org>
