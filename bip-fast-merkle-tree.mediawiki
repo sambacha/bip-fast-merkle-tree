@@ -281,6 +281,12 @@ An implementation of this BIP for extraction of Merkle branches and fast, log-sp
 Also included in this repo is a 'merklebranch' RPC for calculating root values and extracting inclusion proofs for both arbitrary trees and trees constructed from lists of values using the algorithm in this BIP,
 and a 'mergemerklebranch' RPC for unifying two or more fast Merkle tree inclusion proofs--replacing SKIP hashes in one proof with a subtree extracted from another.
 
+==Deployment==
+
+This BIP is used by BIP116 (MERKLEBRANCHVERIFY)[4] to add Merkle inclusion proof verification to script by means of a soft-fork NOP expansion opcode.
+Deployment of MERKLEBRANCHVERIFY would make the contents of this BIP consensus critical.
+The deployment plan for BIP116 is covered in the text of that BIP..
+
 ==References==
 
 [1] [https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2012-2459 National Vulnerability Database: CVE-2012-2459]
@@ -288,3 +294,5 @@ and a 'mergemerklebranch' RPC for unifying two or more fast Merkle tree inclusio
 [2] [https://github.com/sipa/bitcoin/tree/201709_dsha256_64 github.com:sipa/bitcoin 201709_dsha256_64] Pieter Wuille, September 2017, personal communication. By making use of knowledge that the inputs at each stage are fixed length, Mr. Wuille was able to achieve a 22.7% reduction in the time it takes to compute the double-SHA256 hash of 64 bytes of data, the hash aggregation function of the Satoshi Merkle tree construction.
 
 [3] [http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf Secure Hash Standard]
+
+[4] [https://github.com/bitcoin/bips/blob/master/bip-0116.mediawiki BIP 116] MERKLEBRANCHVERIFY
