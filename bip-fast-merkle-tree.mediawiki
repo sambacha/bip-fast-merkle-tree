@@ -3,6 +3,8 @@
   Layer: Consensus (soft fork)
   Title: Fast Merkle Trees
   Author: Mark Friedenbach <mark@friedenbach.org>
+          Kalle Alm <kalle.alm@gmail.com>
+          BtcDrak <btcdrak@gmail.com>
   Status: Draft
   Type: Standards Track
   Created: 2017-08-24
