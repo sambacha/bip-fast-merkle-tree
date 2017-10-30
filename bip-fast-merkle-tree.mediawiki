@@ -285,7 +285,7 @@ and a 'mergemerklebranch' RPC for unifying two or more fast Merkle tree inclusio
 
 This BIP is used by BIP116 (MERKLEBRANCHVERIFY)[4] to add Merkle inclusion proof verification to script by means of a soft-fork NOP expansion opcode.
 Deployment of MERKLEBRANCHVERIFY would make the contents of this BIP consensus critical.
-The deployment plan for BIP116 is covered in the text of that BIP..
+The deployment plan for BIP116 is covered in the text of that BIP.
 
 ==References==
 
@@ -295,4 +295,4 @@ The deployment plan for BIP116 is covered in the text of that BIP..
 
 [3] [http://nvlpubs.nist.gov/nistpubs/FIPS/NIST.FIPS.180-4.pdf Secure Hash Standard]
 
-[4] [https://github.com/bitcoin/bips/blob/master/bip-0116.mediawiki BIP 116] MERKLEBRANCHVERIFY
+[4] [https://github.com/bitcoin/bips/blob/master/bip-0116.mediawiki BIP 116 MERKLEBRANCHVERIFY]
